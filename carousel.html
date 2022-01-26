@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Carousel</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css">
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+		.container{
+			min-height: 55vh;
+			width: 80%;
+			margin: 20px auto;
+			background-image: url('img/wide1.jpg');
+			background-size: cover;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			position: relative;
+		}
+		.slidebutton{
+			cursor: pointer;
+			color: white;
+			height: auto;
+			transition: .8s ease all;
+			padding: 20px;
+		}
+		.slidebutton:hover{
+			background-color: #666666cc;
+		}
+		.slidebutton p{
+			font-weight: bold;
+			position: absolute;
+			left: 10px;
+			top: 10px;
+			letter-spacing: 0.5em;
+		}
+		#slideinfo{
+			margin: 10px;
+			text-align:center;
+			text-transform: uppercase;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="slidebutton" id="btnLeft">
+			<i class="fa fa-angle-left fa-2x"></i>
+			<p><span>1</span>/<span>4</span></p>
+		</div>
+		<div class="slidebutton" id="btnRight">
+			<i class="fa fa-caret-right fa-2x"></i>
+		</div>
+	</div>
+	<p id="slideinfo">Information about picture</p>
+
+	<script type="text/javascript">
+		var container = document.getElementsByClassName('container')[0];
+		var btnLeft = document.getElementById('btnLeft');
+		var btnRight = document.getElementById('btnRight');
+		var current = document.getElementsByTagName('span')[0];
+		var total = document.getElementsByTagName('span')[1];
+
+		var pictures = ['img/wide3.jpg',"img/wide2.jpg", 'img/wide1.jpg',"img/wide4.jpg", 'img/wine.jpg',"img/steak.jpg"];
+		var index = 0;
+		setInterval(()=>{
+			container.style.backgroundImage = "url("+pictures[index++ % pictures.length]+")";
+			total.textContent = pictures.length;
+			console.log(index);
+			if (index > pictures.length){
+				index = 1;
+			}
+			current.textContent = index;
+		}, 1000);
+
+		btnRight.onclick = function () {
+			index ++;
+			console.log(index);
+			container.style.backgroundImage = "url("+pictures[index % pictures.length]+")";
+		};
+
+		btnLeft.onclick = function () {
+			index --;
+			console.log(index);
+			container.style.backgroundImage = "url("+pictures[index % pictures.length]+")";
+		}
+	</script>
+</body>
+</html>
